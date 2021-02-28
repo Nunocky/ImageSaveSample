@@ -27,10 +27,12 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.button.setOnClickListener {
-            val bytes = viewModel.loadAsset("sample.jpg")
+            val bytes = ImageUtil.loadAsset(activity, "sample.jpg")
 
-            viewModel.addImageToGallery("sample.jpg", "image/jpeg", bytes)
-            Toast.makeText(activity, "done", Toast.LENGTH_SHORT).show()
+            bytes?.let { byteArray ->
+                ImageUtil.addToGallery(activity, "sample.jpg", "image/jpeg", byteArray)
+                Toast.makeText(activity, "done", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
